@@ -1,10 +1,10 @@
 import { Button, View } from "react-native";
 import { SCREENS } from "../utils/enums";
 import type { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "../@types/types";
+import type { FavoriteStackParamList } from "../@types/navigation";
 
 type props = StackScreenProps<
-  RootStackParamList,
+  FavoriteStackParamList,
   typeof SCREENS.REVIEW_MAIN_SCREEN
 >;
 

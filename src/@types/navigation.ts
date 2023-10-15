@@ -3,7 +3,9 @@ import { SCREENS } from "../utils/enums";
 
 export type FavoriteStackParamList = {
   [SCREENS.FAVORITE_SCREEN]: undefined;
-  [SCREENS.RESTAURANT_SCREEN]: undefined;
+  [SCREENS.RESTAURANT_SCREEN]: {
+    cafeId: number;
+  };
   [SCREENS.REVIEW_MAIN_SCREEN]: undefined;
   [SCREENS.REVIEW_LIST_SCREEN]: undefined;
   [SCREENS.REVIEW_WRITE_SCREEN]: undefined;

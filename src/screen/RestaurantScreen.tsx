@@ -1,17 +1,19 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { View, Text, Button } from "react-native";
-import { RootStackParamList } from "../@types/types";
+import { FavoriteStackParamList } from "../@types/navigation";
 import { SCREENS } from "./../utils/enums";
 
 type props = StackScreenProps<
-  RootStackParamList,
+  FavoriteStackParamList,
   typeof SCREENS.RESTAURANT_SCREEN
 >;
 
 const RestaurantScreen = ({ navigation, route }: props) => {
+  const { cafeId } = route.params;
+
   return (
     <View>
-      <Text>리뷰들을 여기서 확인합니다.</Text>
+      <Text>{cafeId}입니다.</Text>
     </View>
   );
 };
