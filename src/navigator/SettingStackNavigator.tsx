@@ -1,10 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from "react-native";
 import { SCREENS } from "../utils/enums";
-import OrderRestaurantScreen from "./OrderRestaurantScreen";
-import OrderFavoriteScreen from "./OrderFavoriteScreen";
-import AppInfoScreen from "./AppInfoScreen";
-import SettingsScreen from "./SettingsScreen";
+import OrderRestaurantScreen from "../screen/OrderRestaurantScreen";
+import OrderFavoriteScreen from "../screen/OrderFavoriteScreen";
+import AppInfoScreen from "../screen/AppInfoScreen";
+import SettingsScreen from "../screen/SettingsScreen";
 import { SettingsStackParamList } from "../@types/navigation";
 
 const Stack = createStackNavigator<SettingsStackParamList>();

@@ -1,4 +1,4 @@
-import { TCafeMenus } from "../@types/types";
+import { TCafeMenus, TMenuReview, TReview } from "../@types/types";
 
 export const cafeAndMenus: TCafeMenus[] = [
   {
@@ -67,6 +67,15 @@ export const cafeAndMenus: TCafeMenus[] = [
         price: 3500,
         isSoldOut: false,
         time: "dinner",
+        rate: 4.5,
+      },
+      {
+        id: 8,
+        cafeId: 1,
+        name: "코코아 비빔밥",
+        price: 3500,
+        isSoldOut: false,
+        time: "morning",
         rate: 4.5,
       },
     ],
@@ -187,7 +196,39 @@ export const cafeAndMenus: TCafeMenus[] = [
   },
 ];
 
-export const cafeMenus = [];
+const menuReviews: TMenuReview[] = [];
+
+// Generate 10 sample menu reviews
+for (let i = 1; i <= 10; i++) {
+  const menuReview: TMenuReview = {
+    id: i,
+    name: `Menu Item ${i}`,
+    likes: Math.floor(Math.random() * 100), // Random number of likes
+    isLike: i % 2 === 0, // Alternate between true and false
+    rate: 3.5 + Math.random() * 1.5, // Random rating between 3.5 and 5.0
+    reviews: [],
+  };
+
+  // Generate some sample reviews for each menu review
+  for (let j = 1; j <= 3; j++) {
+    const review: TReview = {
+      id: j,
+      authorId: j,
+      text: `Review ${j} for Menu Item ${i}`,
+      createdAt: new Date(),
+    };
+
+    menuReview.reviews.push(review);
+  }
+
+  menuReviews.push(menuReview);
+}
+
+const getMenuReviewFromIds = (id: number) => {
+  return menuReviews.find((review) => review.id === id);
+};
+
+export { getMenuReviewFromIds };
 
 // 정보가 적을때는 그냥 서버가 한꺼번에 다 주고 클라이언트에서 필터링해서 쓰는게 좋다.
 // 정보가 많아지면 서버에서 필터링해서 보내주는게 좋다.

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, RefreshControl } from "react-native";
 import Margin from "../atoms/Margin";
 import { TCafeMenus, Ttime } from "../../@types/types";
 import Button from "../atoms/Button";
@@ -11,7 +11,6 @@ import {
 import { SCREENS } from "../../utils/enums";
 import { palette } from "../../utils/palette";
 import Divider from "../atoms/Divider";
-import FlexBox from "../atoms/FlexBox";
 import styled from "styled-components/native";
 
 const StyledRow = styled.View`
@@ -24,11 +23,11 @@ const StyledColumnPrimary = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  gap: 5;
+  gap: 5px;
 `;
 
 const StyledColumnSecondary = styled.View`
-  flex-basis: 40;
+  flex-basis: 40px;
   justify-content: center;
   align-items: center;
 `;
@@ -45,16 +44,20 @@ const CafeWithMenuListItem = ({
   return (
     <View
       key={cafe.id}
-      style={{ backgroundColor: palette.white, padding: 10, borderRadius: 10 }}
+      style={{
+        backgroundColor: palette.white,
+        padding: 10,
+        borderRadius: 10,
+        flex: 1,
+      }}
     >
       <StyledRow>
         <StyledColumnPrimary>
           <Text>{cafe.name}</Text>
           <Button
             onPress={() => {
-              navigation.navigate(SCREENS.FAVORITE_NAVIGATOR, {
-                screen: SCREENS.RESTAURANT_SCREEN,
-                params: { cafeId: cafe.id },
+              navigation.navigate(SCREENS.RESTAURANT_SCREEN, {
+                cafeId: cafe.id,
               });
             }}
           >
@@ -76,20 +79,28 @@ const CafeWithMenuListItem = ({
       {cafe.menus.map((menu) => (
         <View key={menu.id}>
           {menu.time === time && (
-            <StyledRow>
-              <StyledColumnPrimary>
-                <Text>{menu.name}</Text>
-              </StyledColumnPrimary>
-              <StyledColumnSecondary>
-                <Text>{menu.price}</Text>
-              </StyledColumnSecondary>
-              <StyledColumnSecondary>
-                <Text>{menu.rate}</Text>
-              </StyledColumnSecondary>
-              <StyledColumnSecondary>
-                <Text>{menu.price}</Text>
-              </StyledColumnSecondary>
-            </StyledRow>
+            <Button
+              onPress={() => {
+                navigation.navigate(SCREENS.REVIEW_MAIN_SCREEN, {
+                  menuId: menu.id,
+                });
+              }}
+            >
+              <StyledRow>
+                <StyledColumnPrimary>
+                  <Text>{menu.name}</Text>
+                </StyledColumnPrimary>
+                <StyledColumnSecondary>
+                  <Text>{menu.price}</Text>
+                </StyledColumnSecondary>
+                <StyledColumnSecondary>
+                  <Text>{menu.rate}</Text>
+                </StyledColumnSecondary>
+                <StyledColumnSecondary>
+                  <Text>{menu.price}</Text>
+                </StyledColumnSecondary>
+              </StyledRow>
+            </Button>
           )}
         </View>
       ))}
@@ -100,27 +111,44 @@ const CafeWithMenuListItem = ({
 const CafeWithMenuList = ({
   cafeWithMenus,
   time,
+  loading,
+  onRefresh,
+  error,
 }: {
   cafeWithMenus: TCafeMenus[];
   time: Ttime;
+  loading: boolean;
+  error: Error | null;
+  onRefresh: () => void;
 }) => {
   return (
-    <ScrollView style={{ paddingHorizontal: 10 }}>
-      {cafeWithMenus.map((cafe) => {
-        if (cafe.menus.filter((menu) => menu.time === time).length == 0)
-          return null;
+    <ScrollView
+      style={{ paddingHorizontal: 10 }}
+      refreshControl={
+        <RefreshControl
+          refreshing={loading}
+          onRefresh={onRefresh}
+        ></RefreshControl>
+      }
+    >
+      {error ? (
+        <Text>에러가 발생했습니다. 다시 시도해주세요</Text>
+      ) : (
+        cafeWithMenus.map((cafe) => {
+          if (cafe.menus.filter((menu) => menu.time === time).length == 0)
+            return null;
 
-        return (
-          <>
-            <CafeWithMenuListItem
-              key={cafe.id}
-              cafeWithMenu={cafe}
-              time={time}
-            ></CafeWithMenuListItem>
-            <Margin margin={10}></Margin>
-          </>
-        );
-      })}
+          return (
+            <React.Fragment key={cafe.id}>
+              <CafeWithMenuListItem
+                cafeWithMenu={cafe}
+                time={time}
+              ></CafeWithMenuListItem>
+              <Margin margin={10}></Margin>
+            </React.Fragment>
+          );
+        })
+      )}
     </ScrollView>
   );
 };

@@ -1,7 +1,10 @@
 import React from "react";
 import FlexBox from "../atoms/FlexBox";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Ttime } from "../../@types/types";
+import Button from "../atoms/Button";
+import IconWithText from "../molecules/IconWithText";
+import Icons from "../atoms/Icons";
 
 const TimeSelector = ({
   time,
@@ -12,25 +15,40 @@ const TimeSelector = ({
 }) => {
   return (
     <View style={{}}>
-      <FlexBox justifyContent="center">
+      <FlexBox justifyContent="center" gap={10}>
         <Button
-          title="아침"
           onPress={() => {
             setTime("morning");
           }}
-        ></Button>
+        >
+          <IconWithText
+            icon={<Icons type="material" name="free-breakfast"></Icons>}
+            text="아침"
+            isSelected={time === "morning"}
+          ></IconWithText>
+        </Button>
         <Button
-          title="점심"
           onPress={() => {
             setTime("lunch");
           }}
-        ></Button>
+        >
+          <IconWithText
+            icon={<Icons type="material" name="lunch-dining"></Icons>}
+            text="점심"
+            isSelected={time === "lunch"}
+          ></IconWithText>
+        </Button>
         <Button
-          title="저녁"
           onPress={() => {
             setTime("dinner");
           }}
-        ></Button>
+        >
+          <IconWithText
+            icon={<Icons type="material" name="dinner-dining"></Icons>}
+            text="저녁"
+            isSelected={time === "dinner"}
+          ></IconWithText>
+        </Button>
       </FlexBox>
     </View>
   );

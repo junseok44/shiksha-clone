@@ -16,22 +16,32 @@ type props = StackScreenProps<
 const tempFavoriteIds = [1];
 
 const FavoriteScreen = ({ navigation, route }: props) => {
-  const { cafeWithMenus, date, time, loading, error, setTime, setDate } =
-    useMenus();
+  const {
+    cafeWithMenus,
+    date,
+    time,
+    loading,
+    error,
+    setTime,
+    setDate,
+    onRefresh,
+  } = useMenus();
 
-  if (error) return <Text>불러오는 도중 오류가 발생했습니다.</Text>;
-  if (!error && loading) return <Text>로딩중...</Text>;
+  const favoriteCafeWithMenus = cafeWithMenus.filter((cafeWithMenu) =>
+    tempFavoriteIds.includes(cafeWithMenu.id)
+  );
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <DateSelector date={date} setDate={setDate}></DateSelector>
       <TimeSelector time={time} setTime={setTime}></TimeSelector>
       <Margin margin={10} />
       <CafeWithMenuList
-        cafeWithMenus={cafeWithMenus.filter((cafeWithMenu) =>
-          tempFavoriteIds.includes(cafeWithMenu.id)
-        )}
+        cafeWithMenus={favoriteCafeWithMenus}
         time={time}
+        loading={loading}
+        error={error}
+        onRefresh={onRefresh}
       ></CafeWithMenuList>
     </View>
   );

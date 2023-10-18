@@ -1,3 +1,4 @@
+import { useRefresh } from "@react-native-community/hooks";
 import { TCafeMenus, Ttime } from "../@types/types";
 import { cafeAndMenus } from "../utils/data";
 import { fakeFetch } from "../utils/fetch";
@@ -7,17 +8,25 @@ export const useMenus = () => {
   const [cafeWithMenus, setCafeWithMenus] = useState<TCafeMenus[]>([]);
   const [time, setTime] = useState<Ttime>("morning");
   const [date, setDate] = useState(new Date());
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | Error>(null);
+
+  const fetchCafeMenus = async () => {
+    try {
+      setError(null);
+      const data = await fakeFetch<TCafeMenus[]>(cafeAndMenus, 1000);
+      setCafeWithMenus(data);
+      return Promise.resolve();
+    } catch (error) {
+      setError(error);
+      setCafeWithMenus([]);
+      return Promise.resolve();
+    }
+  };
+  const { isRefreshing: loading, onRefresh } = useRefresh(fetchCafeMenus);
 
   useEffect(() => {
-    fakeFetch<TCafeMenus[]>(cafeAndMenus, 1000)
-      .then((res) => {
-        setCafeWithMenus(res);
-        setLoading(false);
-      })
-      .catch((error) => setError(error));
-  }, []);
+    onRefresh();
+  }, [date]);
 
   return {
     cafeWithMenus,
@@ -25,6 +34,7 @@ export const useMenus = () => {
     date,
     loading,
     error,
+    onRefresh,
     setTime,
     setDate,
   };

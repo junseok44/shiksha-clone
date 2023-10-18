@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import FlexBox from "../atoms/FlexBox";
 import Button from "../atoms/Button";
+import Icons from "../atoms/Icons";
 
 const DateSelector = ({
   date,
@@ -11,17 +12,44 @@ const DateSelector = ({
   date: Date;
   setDate: React.Dispatch<React.SetStateAction<Date>>;
 }) => {
+  const [isVisiblePicker, setIsVisiblePicker] = useState(false);
+
   return (
     <View style={{ padding: 10 }}>
-      <FlexBox justifyContent="center" alignItems={"center"} gap={5}>
-        <Button onPress={() => {}}>
-          <Text>이전</Text>
+      <FlexBox justifyContent="center" alignItems={"center"} gap={15}>
+        <Button
+          onPress={() => {
+            setDate(new Date(date.getTime() - 24 * 60 * 60 * 1000));
+          }}
+        >
+          <Icons type="ant" name="left" size={15}></Icons>
         </Button>
-        <Text>{date.toLocaleDateString()}</Text>
-        <Button onPress={() => {}}>
-          <Text>이후</Text>
+        <Button
+          onPress={() => {
+            setIsVisiblePicker(true);
+          }}
+        >
+          <Text>{date.toLocaleDateString()}</Text>
+        </Button>
+        <Button
+          onPress={() => {
+            setDate(new Date(date.getTime() + 24 * 60 * 60 * 1000));
+          }}
+        >
+          <Icons type="ant" name="right" size={15}></Icons>
         </Button>
       </FlexBox>
+      <DateTimePickerModal
+        isVisible={isVisiblePicker}
+        onConfirm={(date) => {
+          setDate(date);
+          setIsVisiblePicker(false);
+        }}
+        onCancel={() => {
+          setIsVisiblePicker(false);
+        }}
+        date={date}
+      ></DateTimePickerModal>
     </View>
   );
 };
