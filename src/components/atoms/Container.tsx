@@ -14,8 +14,8 @@ const Container = ({
     <View
       style={{
         paddingHorizontal: 20,
-        ...(styles ? styles : {}),
         backgroundColor: bgColor,
+        ...(styles ? styles : {}),
       }}
     >
       {children}

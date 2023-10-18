@@ -1,44 +1,19 @@
 import * as React from "react";
-import { Text } from "react-native";
-import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
-} from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import FavoriteStackNavigator from "./src/navigator/FavoriteStackNavigator";
-import SettingStackNavigator from "./src/navigator/SettingStackNavigator";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { SCREENS } from "./src/utils/enums";
-import HomeStackNavigator from "./src/navigator/HomeStackNavigator";
+import MainTabNavigator from "./src/navigator/MainTabNavigator";
+import ReviewMainScreen from "./src/screen/ReviewMainScreen";
 import { palette } from "./src/utils/palette";
+import ReviewWriteScreen from "./src/screen/ReviewWriteScreen";
+import ReviewListScreen from "./src/screen/ReviewListScreen";
 
-const Tab = createBottomTabNavigator();
-
-const getHeaderTitleFromRoutes = (route) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? "Menu";
-
-  switch (routeName) {
-    case SCREENS.FAVORITE_SCREEN:
-      return "Favorite";
-    case SCREENS.HOME_SCREEN:
-      return "Menu";
-    case SCREENS.SETTINGS_SCREEN:
-      return "Settings";
-    case SCREENS.REVIEW_MAIN_SCREEN:
-      return "리뷰";
-    case SCREENS.REVIEW_LIST_SCREEN:
-      return "리뷰";
-    case SCREENS.REVIEW_WRITE_SCREEN:
-      return "리뷰 작성";
-    default:
-      return "other";
-  }
-};
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName={SCREENS.HOME_SCREEN}
+      <Stack.Navigator
         screenOptions={({ route, navigation }) => ({
           headerStyle: {
             backgroundColor: palette.orange,
@@ -48,31 +23,23 @@ export default function App() {
           },
         })}
       >
-        <Tab.Screen
-          name={SCREENS.FAVORITE_NAVIGATOR}
-          component={FavoriteStackNavigator}
-          options={({ route, navigation }) => {
-            return {
-              headerTitle: getHeaderTitleFromRoutes(route),
-              tabBarVisible: false,
-            };
-          }}
+        <Stack.Screen
+          name={SCREENS.MAIN_BOTTOM_NAVIGATOR}
+          component={MainTabNavigator}
         />
-        <Tab.Screen
-          name={SCREENS.HOME_NAVIGATOR}
-          component={HomeStackNavigator}
-          options={({ route }) => ({
-            headerTitle: getHeaderTitleFromRoutes(route),
-          })}
-        />
-        <Tab.Screen
-          name={SCREENS.SETTINGS_NAVIGATOR}
-          component={SettingStackNavigator}
-          options={({ route }) => ({
-            headerTitle: getHeaderTitleFromRoutes(route),
-          })}
-        />
-      </Tab.Navigator>
+        <Stack.Screen
+          name={SCREENS.REVIEW_MAIN_SCREEN}
+          component={ReviewMainScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          name={SCREENS.REVIEW_WRITE_SCREEN}
+          component={ReviewWriteScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          name={SCREENS.REVIEW_LIST_SCREEN}
+          component={ReviewListScreen}
+        ></Stack.Screen>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

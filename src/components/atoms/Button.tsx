@@ -33,6 +33,7 @@ export const SubmitButton = (props: TSubmitBtnProps) => {
     <Button
       {...props}
       styles={{
+        ...(props.styles ? props.styles : {}),
         width: "100%",
         borderRadius: 10,
         paddingVertical: 20,

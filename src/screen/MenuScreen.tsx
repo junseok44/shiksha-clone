@@ -22,7 +22,6 @@ const MenuScreen = () => {
       <DateSelector date={date} setDate={setDate}></DateSelector>
       <TimeSelector time={time} setTime={setTime}></TimeSelector>
       <Margin margin={10} />
-
       <CafeWithMenuList
         cafeWithMenus={cafeWithMenus}
         time={time}
