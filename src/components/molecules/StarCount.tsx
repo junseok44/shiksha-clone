@@ -16,6 +16,11 @@ const StarCount = ({
   setCount?: (T: number) => void;
   size?: number;
 }) => {
+  const rest = [];
+  for (let i = count + 1; i <= 5; i++) {
+    rest.push(i);
+  }
+
   return (
     <FlexBox>
       {Array.from({ length: count }).map((_, index) => {
@@ -42,10 +47,10 @@ const StarCount = ({
         }
       })}
 
-      {Array.from({ length: 5 - count }).map((_, index) => {
+      {rest.map((val, index) => {
         if (setCount) {
           return (
-            <Button onPress={() => setCount(index + 1)}>
+            <Button onPress={() => setCount(val)}>
               <Icons
                 type="ant"
                 name="staro"

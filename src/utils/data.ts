@@ -1,6 +1,6 @@
-import { TCafeMenus, TMenuReview, TReview } from "../@types/types";
+import { TCafe, TCafeMenus, TMenuReview, TReview } from "../@types/types";
 
-export const cafeAndMenus: TCafeMenus[] = [
+const cafeAndMenus: TCafeMenus[] = [
   {
     id: 1,
     name: "학생회관",
@@ -196,6 +196,24 @@ export const cafeAndMenus: TCafeMenus[] = [
   },
 ];
 
+const cafes: TCafe[] = [
+  {
+    id: 1,
+    time: {
+      lunchStart: new Date(),
+      lunchEnd: new Date(),
+      HolidayStart: new Date(),
+      HolidayEnd: new Date(),
+      saturdayStart: null,
+      saturdayEnd: null,
+    },
+    cafeId: 1,
+    locationCord: "12동",
+    locationName: "12동",
+    name: "학생회관 식당",
+  },
+];
+
 const menuReviews: TMenuReview[] = [];
 
 // Generate 10 sample menu reviews
@@ -228,7 +246,7 @@ const getMenuReviewFromIds = (id: number) => {
   return menuReviews.find((review) => review.id === id);
 };
 
-export { getMenuReviewFromIds };
+export { getMenuReviewFromIds, cafeAndMenus, cafes };
 
 // 정보가 적을때는 그냥 서버가 한꺼번에 다 주고 클라이언트에서 필터링해서 쓰는게 좋다.
 // 정보가 많아지면 서버에서 필터링해서 보내주는게 좋다.

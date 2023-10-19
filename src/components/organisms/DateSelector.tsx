@@ -15,8 +15,8 @@ const DateSelector = ({
   const [isVisiblePicker, setIsVisiblePicker] = useState(false);
 
   return (
-    <View style={{ padding: 10 }}>
-      <FlexBox justifyContent="center" alignItems={"center"} gap={15}>
+    <View style={{ padding: 16 }}>
+      <FlexBox justifyContent="center" alignItems={"center"} gap={32}>
         <Button
           onPress={() => {
             setDate(new Date(date.getTime() - 24 * 60 * 60 * 1000));

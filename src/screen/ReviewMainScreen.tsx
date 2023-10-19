@@ -13,6 +13,7 @@ import ReviewBoard from "../components/organisms/ReviewBoard";
 import Margin from "../components/atoms/Margin";
 import CommentList from "../components/organisms/CommentList";
 import { ScrollView } from "react-native-gesture-handler";
+import { useEffect } from "react";
 
 type props = StackScreenProps<
   FavoriteStackParamList,
@@ -22,6 +23,11 @@ type props = StackScreenProps<
 const ReviewMainScreen = ({ navigation, route }: props) => {
   const { menuId } = route.params;
 
+  useEffect(() => {
+    fetch("http://10.111.40.28:8080/api/report")
+      .then()
+      .catch((e) => console.log(e));
+  }, []);
   const { menuReview, loading, error } = useMenu(menuId);
 
   if (error)

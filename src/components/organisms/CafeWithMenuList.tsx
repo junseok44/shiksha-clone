@@ -75,7 +75,7 @@ const CafeWithMenuListItem = ({
         </StyledColumnSecondary>
       </StyledRow>
 
-      <Divider width={3} color={palette.orange} margin={5}></Divider>
+      <Divider width={2} color={palette.orange} margin={1}></Divider>
       {cafe.menus.map((menu) => (
         <View key={menu.id}>
           {menu.time === time && (

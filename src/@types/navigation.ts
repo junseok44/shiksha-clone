@@ -1,5 +1,21 @@
 import { SCREENS } from "../utils/enums";
 
+export type LoggedInStackParamList = {
+  [SCREENS.MAIN_BOTTOM_NAVIGATOR]: undefined;
+  [SCREENS.RESTAURANT_SCREEN]: {
+    cafeId: number;
+  };
+  [SCREENS.REVIEW_MAIN_SCREEN]: {
+    menuId: number;
+  };
+  [SCREENS.REVIEW_WRITE_SCREEN]: {
+    menuId: number;
+  };
+  [SCREENS.REVIEW_LIST_SCREEN]: {
+    menuId: number;
+  };
+};
+
 export type MainStackParamList = {
   [SCREENS.MENU_SCREEN]: undefined;
   [SCREENS.FAVORITE_SCREEN]: undefined;

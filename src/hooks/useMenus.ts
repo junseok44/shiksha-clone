@@ -22,6 +22,7 @@ export const useMenus = () => {
       return Promise.resolve();
     }
   };
+
   const { isRefreshing: loading, onRefresh } = useRefresh(fetchCafeMenus);
 
   useEffect(() => {

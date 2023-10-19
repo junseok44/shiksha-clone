@@ -1,25 +1,18 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import FlexBox from "../atoms/FlexBox";
 import StarCount from "../molecules/StarCount";
 import Typography from "../atoms/Typography";
 import { palette } from "../../utils/palette";
+import RoundProfile from "../molecules/RoundProfile";
 
 const Comment = () => {
   return (
     <View>
       <FlexBox gap={5}>
-        <View
-          style={{
-            width: 45,
-            height: 45,
-            borderRadius: "50%",
-            backgroundColor: palette.orange,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        ></View>
+        <RoundProfile>
+          <RoundProfile.Default></RoundProfile.Default>
+        </RoundProfile>
         <View style={{ flex: 1 }}>
           <FlexBox justifyContent="space-between">
             <Typography size={13}>ID 9595</Typography>

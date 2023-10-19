@@ -24,6 +24,7 @@ const ReviewWriteScreen = () => {
         <FlexBox
           direction="column"
           alignItems="center"
+          justifyContent="flex-end"
           gap={gap}
           styles={{ flex: 1, paddingVertical: gap }}
         >
@@ -47,13 +48,10 @@ const ReviewWriteScreen = () => {
               ></TextInput>
             </View>
           </View>
+          <View style={{ flex: 1 }}></View>
           <SubmitButton
             onPress={() => {}}
             isActive={text.length > 0 && rate != 0}
-            styles={{
-              position: "absolute",
-              bottom: gap,
-            }}
           >
             <SubmitButton.Text>작성완료</SubmitButton.Text>
           </SubmitButton>

@@ -7,6 +7,7 @@ import ReviewMainScreen from "./src/screen/ReviewMainScreen";
 import { palette } from "./src/utils/palette";
 import ReviewWriteScreen from "./src/screen/ReviewWriteScreen";
 import ReviewListScreen from "./src/screen/ReviewListScreen";
+import RestaurantScreen from "./src/screen/RestaurantScreen";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,10 @@ export default function App() {
           name={SCREENS.MAIN_BOTTOM_NAVIGATOR}
           component={MainTabNavigator}
         />
+        <Stack.Screen
+          name={SCREENS.RESTAURANT_SCREEN}
+          component={RestaurantScreen}
+        ></Stack.Screen>
         <Stack.Screen
           name={SCREENS.REVIEW_MAIN_SCREEN}
           component={ReviewMainScreen}
