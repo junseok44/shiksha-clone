@@ -6,6 +6,7 @@ import OrderFavoriteScreen from "../screen/OrderFavoriteScreen";
 import AppInfoScreen from "../screen/AppInfoScreen";
 import SettingsScreen from "../screen/SettingsScreen";
 import { SettingsStackParamList } from "../@types/navigation";
+import Header from "../components/organisms/Header";
 
 const Stack = createStackNavigator<SettingsStackParamList>();
 
@@ -13,10 +14,33 @@ const SettingStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        header: (props) => {
+          return (
+            <Header>
+              <Header.GoBack
+                onPressGoBack={() => {
+                  props.navigation.goBack();
+                }}
+              />
+              <Header.Title>설정</Header.Title>
+            </Header>
+          );
+        },
       }}
     >
-      <Stack.Screen name={SCREENS.SETTINGS_SCREEN} component={SettingsScreen} />
+      <Stack.Screen
+        name={SCREENS.SETTINGS_SCREEN}
+        component={SettingsScreen}
+        options={{
+          header: (props) => {
+            return (
+              <Header>
+                <Header.Title>설정</Header.Title>
+              </Header>
+            );
+          },
+        }}
+      />
       <Stack.Screen
         name={SCREENS.ORDER_RESTAURANT_SCREEN}
         component={OrderRestaurantScreen}

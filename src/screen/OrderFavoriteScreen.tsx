@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
+import CenterContainer from "../components/atoms/CenterLayout";
 
 const OrderFavoriteScreen = () => {
   return (
-    <View>
-      <Text>order your favorites</Text>
-    </View>
+    <CenterContainer>
+      <Text>기능 준비중입니다.</Text>
+    </CenterContainer>
   );
 };
 

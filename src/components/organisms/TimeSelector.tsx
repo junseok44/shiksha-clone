@@ -15,7 +15,7 @@ const TimeSelector = ({
 }) => {
   return (
     <View style={{}}>
-      <FlexBox justifyContent="center" gap={10}>
+      <FlexBox justifyContent="center" gap={20}>
         <Button
           onPress={() => {
             setTime("morning");

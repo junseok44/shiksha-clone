@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, RefreshControl } from "react-native";
+import { View, Text, ScrollView, RefreshControl, Modal } from "react-native";
 import Margin from "../atoms/Margin";
 import { TCafeMenus, Ttime } from "../../@types/types";
 import Button from "../atoms/Button";
@@ -12,6 +12,11 @@ import { SCREENS } from "../../utils/enums";
 import { palette } from "../../utils/palette";
 import Divider from "../atoms/Divider";
 import styled from "styled-components/native";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  currentCafeIdAtom,
+  isCafeModalOpenedAtom,
+} from "../../state/cafeModalAtom";
 
 const StyledRow = styled.View`
   flex-direction: row;
@@ -41,6 +46,9 @@ const CafeWithMenuListItem = ({
 }) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
+  const setIsModalOpen = useSetRecoilState(isCafeModalOpenedAtom);
+  const setCurrentCafeId = useSetRecoilState(currentCafeIdAtom);
+
   return (
     <View
       key={cafe.id}
@@ -56,9 +64,8 @@ const CafeWithMenuListItem = ({
           <Text>{cafe.name}</Text>
           <Button
             onPress={() => {
-              navigation.navigate(SCREENS.RESTAURANT_SCREEN, {
-                cafeId: cafe.id,
-              });
+              setCurrentCafeId(cafe.id);
+              navigation.navigate(SCREENS.RESTAURANT_SCREEN);
             }}
           >
             <Text style={{ color: "red" }}>식당 정보</Text>

@@ -6,6 +6,9 @@ import { getHeaderTitleFromRoutes } from "../utils/navigation";
 import FavoriteScreen from "../screen/FavoriteScreen";
 import MenuScreen from "../screen/MenuScreen";
 import SettingStackNavigator from "./SettingStackNavigator";
+import { Text, View } from "react-native";
+import BottomTabBar from "../components/organisms/BottomTabBar";
+import Header from "../components/organisms/Header";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,8 +17,13 @@ const MainTabNavigator = () => {
     <Tab.Navigator
       initialRouteName={SCREENS.MENU_SCREEN}
       screenOptions={({ route }) => ({
-        headerShown: false,
+        header: (props) => (
+          <Header {...props}>
+            <Header.Icon></Header.Icon>
+          </Header>
+        ),
       })}
+      tabBar={(props) => <BottomTabBar {...props}></BottomTabBar>}
     >
       <Tab.Screen
         name={SCREENS.FAVORITE_SCREEN}
@@ -37,9 +45,9 @@ const MainTabNavigator = () => {
       <Tab.Screen
         name={SCREENS.SETTINGS_NAVIGATOR}
         component={SettingStackNavigator}
-        options={({ route }) => ({
-          headerTitle: getHeaderTitleFromRoutes(route),
-        })}
+        options={{
+          headerShown: false,
+        }}
       />
     </Tab.Navigator>
   );

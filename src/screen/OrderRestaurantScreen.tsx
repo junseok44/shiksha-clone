@@ -1,9 +1,10 @@
 import { Text, View } from "react-native";
+import CenterContainer from "../components/atoms/CenterLayout";
 const OrderRestaurantScreen = () => {
   return (
-    <View>
-      <Text>fweaf</Text>
-    </View>
+    <CenterContainer>
+      <Text>기능 준비중입니다.</Text>
+    </CenterContainer>
   );
 };
 

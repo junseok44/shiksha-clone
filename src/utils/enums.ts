@@ -11,4 +11,8 @@ export const SCREENS = {
   REVIEW_LIST_SCREEN: "ReviewListScreen" as const,
   REVIEW_WRITE_SCREEN: "ReviewWriteScreen" as const,
   APP_INFO_SCREEN: "AppInfoScreen" as const,
+  ADMIN_ADD_MENU_SCREENS: "AddMenuScreen" as const,
+  ADMIN_ADD_CAFE_SCREENS: "AddCafeScreen" as const,
+  ADMIN_ADD__SCREENS: "AddReviewScreen" as const,
+  CLIENT_CONFIG_SCREEN: "ClientConfigScreen" as const,
 };

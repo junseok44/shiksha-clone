@@ -3,7 +3,7 @@
 # dependencies
 node_modules/
 /TODO.md
-
+/.env
 # Expo
 .expo/
 dist/

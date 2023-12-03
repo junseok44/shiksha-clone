@@ -8,7 +8,7 @@ export const useMenu = (menuId: number) => {
     undefined
   );
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | Error>(null);
 
   const fetch = async () => {
     try {
@@ -18,8 +18,7 @@ export const useMenu = (menuId: number) => {
       setMenuReview(data);
       setLoading(false);
     } catch (err) {
-      console.log(err);
-      setError(err);
+      if (err instanceof Error) setError(err);
       setLoading(false);
     }
   };

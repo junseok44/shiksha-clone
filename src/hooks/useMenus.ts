@@ -17,7 +17,7 @@ export const useMenus = () => {
       setCafeWithMenus(data);
       return Promise.resolve();
     } catch (error) {
-      setError(error);
+      if (error instanceof Error) setError(error);
       setCafeWithMenus([]);
       return Promise.resolve();
     }

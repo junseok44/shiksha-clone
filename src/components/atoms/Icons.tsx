@@ -1,5 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const Icons = ({
   type = "material",
@@ -8,7 +9,7 @@ const Icons = ({
   color = "black",
 }: {
   name: string;
-  type: "material" | "ant";
+  type: "material" | "ant" | "font-awesome";
   size?: number;
   color?: string;
 }) => {
@@ -16,6 +17,8 @@ const Icons = ({
     return <MaterialIcons name={name} size={size} color={color} />;
   else if (type === "ant")
     return <AntDesign name={name} size={size} color={color} />;
+  else if (type === "font-awesome")
+    return <FontAwesome5 name={name} size={size} color={color} />;
   else return null;
 };
 
